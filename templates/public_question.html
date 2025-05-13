@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}发布问答{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+    <h2 class="text-center mb-4">发布问答</h2>
+    <form method="POST" action="#">
+        <div class="mb-3">
+            <label for="title" class="form-label">标题</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="请输入问题标题" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">内容</label>
+            <textarea class="form-control" id="content" name="content" rows="6" placeholder="详细描述你的问题..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">发布</button>
+    </form>
+</div>
+{% endblock %}

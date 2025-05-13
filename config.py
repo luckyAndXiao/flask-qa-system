@@ -1,0 +1,24 @@
+HOSTNAME = '127.0.0.1'
+PORT = 33061
+USERNAME = "root"
+PASSWORD = "Liuxin%401234"
+DATABASE = 'qa'
+DB_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}?charset=utf8"
+SQLALCHEMY_DATABASE_URI = DB_URI
+
+#dsubzyidvamrdccj
+# 邮箱配置
+MAIL_SERVER = "smtp.qq.com"
+MAIL_USE_SSL = True
+MAIL_PORT = 465
+MAIL_USERNAME = "3035934532@qq.com"
+MAIL_PASSWORD = "dsubzyidvamrdccj"
+MAIL_DEFAULT_SENDER = "3035934532@qq.com"
+
+SECRET_KEY = "akjsldkfjwoei"
+
+# Redis 配置
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
+REDIS_DB = 0
+REDIS_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"

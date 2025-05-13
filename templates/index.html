@@ -1,0 +1,70 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block title %}问答系统 - 首页{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<div class="container mt-4">#}
+{#    <h2 class="mb-4 text-center">最新问答</h2>#}
+{##}
+{#    {% for question in questions %}#}
+{#    <div class="card mb-3 shadow-sm">#}
+{#        <div class="card-body">#}
+{#            <h5 class="card-title">#}
+{#                <a href="{{ url_for('qa.qa_detail', question_id=question.id) }}" class="text-decoration-none text-primary">#}
+{#                    {{ question.title }}#}
+{#                </a>#}
+{#            </h5>#}
+{#            <p class="card-text text-muted mb-2">#}
+{#                {{ question.content[:150] }}...#}
+{#            </p>#}
+{#            <div class="d-flex justify-content-between text-muted small">#}
+{#                <div>作者：{{ question.author.username }}</div>#}
+{#                <div>{{ question.create_time.strftime('%Y-%m-%d %H:%M') }}</div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    {% else %}#}
+{#    <p class="text-center text-muted">暂无问答内容，快去发布一个吧！</p>#}
+{#    {% endfor %}#}
+{#</div>#}
+{#{% endblock %}#}
+
+{% extends "base.html" %}
+
+{% block title %}问答系统 - 首页{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">🎓 最新问答</h2>
+        <p class="text-muted">发现最新的问题和解答，与社区一同成长</p>
+    </div>
+
+    {% for question in questions %}
+    <div class="card mb-4 border-start border-3 border-primary shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="{{ url_for('qa.qa_detail', question_id=question.id) }}" class="text-decoration-none text-dark">
+                    {{ question.title }}
+                </a>
+            </h5>
+            <p class="card-text text-muted mt-2">
+                {{ question.content[:150] }}{% if question.content|length > 150 %}...{% endif %}
+            </p>
+            <div class="d-flex justify-content-between align-items-center mt-3 text-secondary small">
+                <div>
+                    👤 <strong>{{ question.author.username }}</strong>
+                </div>
+                <div>
+                    🕒 {{ question.create_time.strftime('%Y-%m-%d %H:%M') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center" role="alert">
+        暂无问答内容，快去 <a href="{{ url_for('qa.public_question') }}" class="alert-link">发布一个问题</a> 吧！
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

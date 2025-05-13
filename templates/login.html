@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}用户登录{% endblock %}
+{% block extra_style %} <style>
+        body {
+            background: #eef1f5;
+        }
+        .loginform-container {
+            max-width: 400px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+    </style>
+    </style> {% endblock %}
+{% block content %}
+    <div class="loginform-container">
+        <h3 class="text-center mb-4">用户登录</h3>
+        <form method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">用户邮箱</label>
+                <input type="text" class="form-control" id="username" name="email" placeholder="请输入用户名(邮箱)" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">登录</button>
+        </form>
+        <div class="text-center mt-3">
+            还没有账号？<a href="/auth/register">点击注册</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block title %}问题详情 - {{ question.title }}{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<div class="container mt-4">#}
+{#    <!-- 问题部分 -->#}
+{#    <div class="card mb-4 shadow-sm">#}
+{#        <div class="card-body">#}
+{#            <h3 class="card-title mb-3">{{ question.title }}</h3>#}
+{#            <p class="card-text">{{ question.content }}</p>#}
+{#            <div class="text-muted small d-flex justify-content-between mt-3">#}
+{#                <div>作者：{{ question.author.username }}</div>#}
+{#                <div>发布时间：{{ question.create_time.strftime('%Y-%m-%d %H:%M') }}</div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <!-- 回答部分 -->#}
+{#    <h5 class="mb-3">所有回答（{{ question.answers|length }}）</h5>#}
+{#    {% for answer in question.answers %}#}
+{#    <div class="card mb-3 border-start border-primary shadow-sm">#}
+{#        <div class="card-body">#}
+{#            <p class="card-text">{{ answer.content }}</p>#}
+{#            <div class="text-muted small d-flex justify-content-between mt-2">#}
+{#                <div>回答者：{{ answer.author.username }}</div>#}
+{#                <div>{{ answer.create_time.strftime('%Y-%m-%d %H:%M') }}</div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    {% else %}#}
+{#    <p class="text-muted">暂无回答，快来抢沙发吧！</p>#}
+{#    {% endfor %}#}
+{##}
+{#    <!-- 发布回答部分 -->#}
+{#    {% if g.user %}#}
+{#    <div class="card mt-4 shadow-sm">#}
+{#        <div class="card-body">#}
+{#            <h5 class="card-title">我来回答</h5>#}
+{#            <form method="post" action="{{ url_for('qa.answer', question_id=question.id) }}">#}
+{#                <div class="mb-3">#}
+{#                    <textarea name="content" class="form-control" rows="4" placeholder="请输入你的回答..." required></textarea>#}
+{#                </div>#}
+{#                <button type="submit" class="btn btn-primary">提交回答</button>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#    {% else %}#}
+{#    <div class="alert alert-warning mt-4 text-center">#}
+{#        请 <a href="{{ url_for('auth.login') }}">登录</a> 后参与回答。#}
+{#    </div>#}
+{#    {% endif %}#}
+{#</div>#}
+{#{% endblock %}#}
+
+{% extends "base.html" %}
+
+{% block title %}问题详情 - {{ question.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- 问题部分 -->
+    <div class="card mb-4 shadow border-start border-4 border-primary">
+        <div class="card-body">
+            <h3 class="card-title fw-bold text-primary">{{ question.title }}</h3>
+            <p class="card-text mt-3">{{ question.content }}</p>
+            <div class="d-flex justify-content-between text-muted small mt-4">
+                <div>👤 作者：<strong>{{ question.author.username }}</strong></div>
+                <div>📅 发布时间：{{ question.create_time.strftime('%Y-%m-%d %H:%M') }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 回答部分 -->
+    <div class="mb-4">
+        <h5 class="mb-3">💬 所有回答（{{ question.answers|length }}）</h5>
+        {% for answer in question.answers %}
+        <div class="card mb-3 border-start border-success shadow-sm">
+            <div class="card-body">
+                <p class="card-text">{{ answer.content }}</p>
+                <div class="d-flex justify-content-between text-muted small mt-2">
+                    <div>🙋 回答者：{{ answer.author.username }}</div>
+                    <div>🕒 {{ answer.create_time.strftime('%Y-%m-%d %H:%M') }}</div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-muted">暂无回答，快来抢沙发吧！🚀</p>
+        {% endfor %}
+    </div>
+
+    <!-- 发布回答部分 -->
+    {% if g.user %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-3">✍️ 我来回答</h5>
+            <form method="post" action="{{url_for("qa.public_answer")}}">
+                <div class="mb-3">
+                    <textarea name="content" class="form-control" rows="3" placeholder="请输入你的回答..." required></textarea>
+                    <input type="hidden" name="question_id" value="{{ question.id }}">
+                </div>
+                <button type="submit" class="btn btn-success">提交回答</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-warning mt-4 text-center">
+        请 <a href="{{ url_for('auth.login') }}" class="alert-link">登录</a> 后参与回答。
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
