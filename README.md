@@ -23,7 +23,7 @@
 | ORM          | SQLAlchemy               |
 | 前端模板     | Jinja2 + Bootstrap     |
 | 表单验证     | WTForms                  |
-| 数据库       | MySQL 8.0   Redis             |
+| 数据库       | MySQL 8.0, Redis             |
 
 ## 🚀 快速开始
 
@@ -31,11 +31,13 @@
 - Python 3.8+
 - MySQL 8.0+
 - pip 包管理器
+- flask
+- jinja2
 
 ### 部署流程
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/yourusername/flask-qa-platform.git
-cd flask-qa-platform
+git clone https://github.com/luckyAndXiao/flask-qa-system.git
+cd flask-qa-system
 ```
